@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">TP3</string>
+    <string name="app_name">TP4</string>
     <string name="btnScanner">Scanner</string>
     <string name="addProduct">Ajouter produit</string>
     <string name="btnPayer">Payer</string>
@@ -17,4 +17,5 @@
     <string name="product_invalid">Le produit entré est invalide</string>
     <string name="cancel">Annuler</string>
     <string name="no_product_to_pay">Pas de produits à payer</string>
+    <string name="transaction">Transaction</string>
 </resources>

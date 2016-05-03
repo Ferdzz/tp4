@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TP3</string>
+    <string name="app_name">TP4</string>
     <string name="btnScanner">Scanner</string>
     <string name="addProduct">Add Product</string>
     <string name="btnPayer">Pay</string>
@@ -16,4 +16,5 @@
     <string name="product_invalid">Product entered is invalid</string>
     <string name="cancel">Cancel</string>
     <string name="no_product_to_pay">No products to pay</string>
+    <string name="transaction">Transaction</string>
 </resources>

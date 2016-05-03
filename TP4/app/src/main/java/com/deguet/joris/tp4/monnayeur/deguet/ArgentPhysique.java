@@ -17,10 +17,13 @@ public enum ArgentPhysique {
 	public final int valeurEnCents;
 	
 	public final String nomLisible;
+
+	private int amounts;
 	
 	ArgentPhysique(int c, String pretty){
 		this.valeurEnCents = c;
 		this.nomLisible = pretty;
+		this.amounts = 0;
 	}
 	
 	public Double valeur(){
@@ -28,5 +31,13 @@ public enum ArgentPhysique {
 	}
 	
 	public String nomLisible(){return this.nomLisible;}
-	
+
+	public int getAmounts() {
+		return amounts;
+	}
+
+	public void setAmounts(int amounts) {
+		if (amounts >= 0)
+		this.amounts = amounts;
+	}
 }
