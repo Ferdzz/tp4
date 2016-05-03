@@ -1,9 +1,13 @@
 package com.deguet.joris.tp4;
 
+import android.support.test.runner.AndroidJUnit4;
+
 import com.deguet.joris.tp4.monnayeur.deguet.*;
 import com.deguet.joris.tp4.monnayeur.binette.*;
 import org.junit.Assert;
 import org.junit.Test;
+
+
 
 /**
  * Created by 1146390 on 2016-02-23.
