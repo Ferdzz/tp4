@@ -25,10 +25,10 @@ public class Utils {
         float totalTaxes = 0;
         for (Product p : products) {
             if(p.isTaxable) {
-                totalPrice += .15 * (priceForProductWithDiscount(products, p));
+                totalTaxes += .15 * (priceForProductWithDiscount(products, p));
             }
         }
-        return totalPrice;
+        return totalTaxes;
     }
 
     public static float priceForProductWithDiscount(List<Product> products, Product product) {
