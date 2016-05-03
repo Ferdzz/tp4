@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">TP3</string>
+    <string name="btnScanner">Scanner</string>
+    <string name="addProduct">Add Product</string>
+    <string name="btnPayer">Pay</string>
+    <string name="total">Total: %d $</string>
+    <string name="productNotFound">The product code scanned was not found in the collection</string>
+    <string name="duplicateProduct">The product you scanned is already in the list</string>
+    <string name="name">Name</string>
+    <string name="price">Price</string>
+    <string name="code">Barcode</string>
+    <string name="empty_products">Empty products</string>
+    <string name="create_products">Create products</string>
+    <string name="fill_list">Fill products list</string>
+    <string name="not_enough_products">Not enough products to generate list</string>
+    <string name="product_invalid">Product entered is invalid</string>
+    <string name="cancel">Cancel</string>
+    <string name="no_product_to_pay">No products to pay</string>
+</resources>

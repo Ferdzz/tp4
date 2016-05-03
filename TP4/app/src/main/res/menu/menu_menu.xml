@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/empty_products" android:title="@string/empty_products"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/create_products" android:title="@string/create_products"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/fill_list" android:title="@string/fill_list"
+        android:orderInCategory="100" app:showAsAction="never" />
+</menu>

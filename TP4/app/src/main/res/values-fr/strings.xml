@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TP3</string>
+    <string name="btnScanner">Scanner</string>
+    <string name="addProduct">Ajouter produit</string>
+    <string name="btnPayer">Payer</string>
+    <string name="total">Total: %d $</string>
+    <string name="productNotFound">Le code de produit scanné n\'a pas été trouvé</string>
+    <string name="duplicateProduct">Le produit scanné est déjà dans la liste</string>
+    <string name="name">Nom</string>
+    <string name="price">Prix</string>
+    <string name="code">Code barre</string>
+    <string name="empty_products">Vider les produits</string>
+    <string name="create_products">Creer les produits</string>
+    <string name="fill_list">Remplir la liste de pruits</string>
+    <string name="not_enough_products">Pas assez de produits pour générer la liste</string>
+    <string name="product_invalid">Le produit entré est invalide</string>
+    <string name="cancel">Annuler</string>
+    <string name="no_product_to_pay">Pas de produits à payer</string>
+</resources>
