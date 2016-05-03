@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
             products.clear();
 
             ArrayList<Product> products = new ArrayList<>();
-            products.add(new Product("Lait", 2.65F, "123412341230"));
+            products.add(new Product("Lait", 2.65F, "123412341230", true, false));
             products.add(new Product("Bonbons", 10.45F, "112233445562"));
             products.add(new Product("T-shirt", 3.98F, "725272730720"));
             products.add(new Product("Colibri", 10.00F, "725272730737"));
@@ -190,8 +190,8 @@ public class MainActivity extends AppCompatActivity {
                         return;
                     }
                 }
-                Product p3 = new Product(p.name, 1, p.price);
-                p3.codeBarre = p.codeBarre;
+                Product p3 = p.clone();
+                p3.amount = 1;
 
                 products.add(p3);
                 adapter.notifyDataSetChanged();
@@ -205,10 +205,6 @@ public class MainActivity extends AppCompatActivity {
         if(products.size() <= 0) {
             Toast.makeText(getApplicationContext(), R.string.no_product_to_pay, Toast.LENGTH_SHORT).show();
             return;
-        }
-
-        for (Purchase p : purchaseCRUD.getAll()) {
-            Log.i("Caisse", p.toString());
         }
 
         Purchase purchase = new Purchase(products);

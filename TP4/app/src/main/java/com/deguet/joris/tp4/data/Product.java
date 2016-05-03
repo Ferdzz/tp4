@@ -9,16 +9,25 @@ public class Product {
     public int amount;
     public float price;
     public String codeBarre;
+    public boolean is2for1, isTaxable;
 
     public Product(String name, int amount, float price) {
         this.name = name;
         this.amount = amount;
         this.price = price;
+        this.is2for1 = false;
+        this.isTaxable = false;
     }
 
     public Product(String name, float price, String codeBarre) {
         this(name, 0, price);
         this.codeBarre = codeBarre;
+    }
+
+    public Product(String name, float price, String codeBarre, boolean is2for1, boolean isTaxable) {
+        this(name, price, codeBarre);
+        this.is2for1 = is2for1;
+        this.isTaxable = isTaxable;
     }
 
     public Long getId() {
@@ -39,6 +48,12 @@ public class Product {
             return "Product [amount=" + amount + ", name=" + name
                     + ", codeBarre=" + codeBarre
                     + ", price=" + price + "]";
+    }
+
+    @Override
+    public Product clone()  {
+        Product product = new Product(name, price, codeBarre, is2for1, isTaxable);
+        return product;
     }
 
     @Override

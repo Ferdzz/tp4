@@ -1,5 +1,8 @@
 package com.deguet.joris.tp4.data;
 
+import com.deguet.joris.tp4.Utils;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,16 +14,14 @@ public class Purchase {
     public List<Product> products;
     public float total;
     public Date date;
+    public float taxTotal = 0;
 
     public Purchase(List<Product> products) {
         this.products = products;
-
-        total = 0;
-        for (Product p: products) {
-            total += p.amount * p.price;
-        }
-
         this.date = new Date();
+
+        this.total = Utils.calculateTotalPrice(products);
+        this.taxTotal = Utils.calculateTaxes(products, this.total);
     }
 
     public Long getId() {

@@ -50,9 +50,6 @@ public class ProductsAdapter extends ArrayAdapter<Product> {
         super.notifyDataSetChanged();
         float total = 0;
         MainActivity c = (MainActivity)getContext();
-        for (Product p : c.products) {
-            total += p.amount * p.price;
-        }
-        c.updatePrice(total);
+        c.updatePrice(Utils.calculateTotalPrice(c.products));
     }
 }
