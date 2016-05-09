@@ -37,7 +37,7 @@ public class NewProductDialog extends DialogFragment {
                         String name = ((TextView) v.findViewById(R.id.dialog_name)).getText().toString();
                         String price = ((TextView) v.findViewById(R.id.dialog_price)).getText().toString();
                         String code = ((TextView) v.findViewById(R.id.dialog_code)).getText().toString();
-                        if (name.length() == 0 || price.length() == 0 || Float.parseFloat(price) < 0 || !BarcodeValidator.isUPCValid(code)) {
+                        if (name.length() == 0 || price.length() == 0 || Float.parseFloat(price) < 0 || !Utils.isUPCValid(code)) {
                             Toast.makeText(getDialog().getContext(), R.string.product_invalid, Toast.LENGTH_SHORT).show();
                             getDialog().cancel();
                             return;

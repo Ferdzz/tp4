@@ -27,7 +27,7 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
 
     public List<Product> products;
-//    public List<Product> availableProducts;
+
     public ProductsAdapter adapter;
     public ProductCRUD productCRUD;
     public PurchaseCRUD purchaseCRUD;
@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        this.availableProducts = new ArrayList<>();
         this.products = new ArrayList<>();
         this.productCRUD = new ProductCRUD(getApplicationContext());
         this.purchaseCRUD = new PurchaseCRUD(getApplicationContext());
@@ -70,47 +69,23 @@ public class MainActivity extends AppCompatActivity {
         });
 
         updatePrice(0);
-
-
-//        File file = new File(getFilesDir(), "products.txt");
-//        if(file.exists()) {
-//            try {
-//                BufferedReader reader = new BufferedReader(new FileReader(file));
-//                String line;
-//                while((line = reader.readLine()) != null) {
-//                    String[] info = line.split(",");
-//                    Product product = new Product(info[0], Float.parseFloat(info[1]), info[2]);
-//                    availableProducts.add(product);
-//                }
-//                adapter.notifyDataSetChanged();
-//                reader.close();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.empty_products) {
-//            clearAvailableProducts(this);
             productCRUD.deleteAll();
             products.clear();
             adapter.notifyDataSetChanged();
             return true;
         } else if (id == R.id.create_products) {
-//            clearAvailableProducts(this);
             products.clear();
 
             ArrayList<Product> products = new ArrayList<>();
@@ -207,9 +182,12 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        Purchase purchase = new Purchase(products);
-        purchaseCRUD.save(purchase);
+//        Purchase purchase = new Purchase(products);
+//        purchaseCRUD.save(purchase);
 
+        new TransactionDialog().show(getFragmentManager(), "Change");
+
+        // TODO: Peut-etre qu'il faudrait pas clear la liste ici et créer une facture avant?
         products.clear();
         adapter.notifyDataSetChanged();
     }
