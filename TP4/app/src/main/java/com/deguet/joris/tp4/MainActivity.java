@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
 //        Purchase purchase = new Purchase(products);
 //        purchaseCRUD.save(purchase);
 
-        new TransactionDialog().show(getFragmentManager(), "Change");
+        new TransactionDialog().setProductsList(products).show(getFragmentManager(), "Change");
 
         // TODO: Peut-etre qu'il faudrait pas clear la liste ici et créer une facture avant?
         products.clear();

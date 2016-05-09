@@ -47,7 +47,7 @@ public class Utils {
 
     /**
      * Voir  http://en.wikipedia.org/wiki/Universal_Product_Code#Check_digits
-     * @param s
+     * @param s UPC string
      * @return
      * @author Jorris
      */

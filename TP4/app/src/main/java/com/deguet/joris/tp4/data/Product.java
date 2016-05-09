@@ -16,7 +16,7 @@ public class Product {
         this.amount = amount;
         this.price = price;
         this.is2for1 = false;
-        this.isTaxable = false;
+        this.isTaxable = true;
     }
 
     public Product(String name, float price, String codeBarre) {

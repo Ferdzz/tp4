@@ -18,6 +18,7 @@ import com.deguet.joris.tp4.data.Product;
 import com.deguet.joris.tp4.monnayeur.deguet.ArgentPhysique;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by 1146390 on 2016-05-03.
@@ -46,6 +47,7 @@ public class TransactionDialog extends DialogFragment {
 
     private ChangeAdapter adapter;
     private ArrayList<ArgentPhysique> listArgent;
+    private List<Product> productsList;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -67,7 +69,7 @@ public class TransactionDialog extends DialogFragment {
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-
+                        logFacture();
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -76,5 +78,31 @@ public class TransactionDialog extends DialogFragment {
                     }
                 });
         return builder.create();
+    }
+
+    public TransactionDialog setProductsList(List<Product> productsList) {
+        this.productsList = new ArrayList<>(productsList);
+        return this;
+    }
+    
+    private void logFacture() {
+        Log.i("Facture", "  ");
+        Log.i("Facture", "Liste des produits : ");
+        for (Product p : productsList) {
+            String string = "  " + p.name;
+            if(p.is2for1)
+                string += " (2 pour 1)";
+            if(!p.isTaxable)
+                string += " (non taxable)";
+            string += "\t x" + p.amount;
+            Log.i("Facture", "\t" + string);
+        }
+
+        float total = Utils.calculateTotalPrice(productsList);
+        float taxes = Utils.calculateTaxes(productsList, total);
+        Log.i("Facture", "Sous total : \t" + total + "$");
+        Log.i("Facture", "   Taxes \t" + taxes + "$");
+        Log.i("Facture", "Total : \t" + String.format("%.02f", (total + taxes)) + "$");
+        Log.i("Facture", "  ");
     }
 }
