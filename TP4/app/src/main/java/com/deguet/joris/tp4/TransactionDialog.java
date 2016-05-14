@@ -8,14 +8,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.deguet.joris.tp4.data.Product;
+import com.deguet.joris.tp4.monnayeur.deguet.ArgentException;
 import com.deguet.joris.tp4.monnayeur.deguet.ArgentPhysique;
+import com.deguet.joris.tp4.monnayeur.deguet.Change;
+import com.deguet.joris.tp4.monnayeur.deguet.ChangeService;
+import com.deguet.joris.tp4.monnayeur.deguet.TiroirArgent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +49,8 @@ public class TransactionDialog extends DialogFragment {
     private ChangeAdapter adapter;
     private ArrayList<ArgentPhysique> listArgent;
     private List<Product> productsList;
+    private TiroirArgent tiroir;
+    private ChangeService changeService;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -70,6 +73,18 @@ public class TransactionDialog extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         logFacture();
+
+                        try {
+                            double total = 0;
+                            for (ArgentPhysique a : listArgent) {
+                                total += a.getAmounts() * a.valeur();
+                            }
+                            Change change = changeService.calculerChange(total, tiroir);
+                            new ChangeDialog().setChange(change).show(getFragmentManager(), "Transaction end");
+//                            getDialog().dismiss();
+                        } catch (ArgentException e) {
+                            Toast.makeText(getActivity().getApplicationContext(), R.string.not_enough_money, Toast.LENGTH_SHORT).show();
+                        }
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -84,8 +99,18 @@ public class TransactionDialog extends DialogFragment {
         this.productsList = new ArrayList<>(productsList);
         return this;
     }
+
+    public TransactionDialog setChangeService(ChangeService changeService) {
+        this.changeService = changeService;
+        return this;
+    }
+
+    public TransactionDialog setTiroir(TiroirArgent tiroir) {
+        this.tiroir = tiroir;
+        return this;
+    }
     
-    private void logFacture() {
+    private float logFacture() {
         Log.i("Facture", "  ");
         Log.i("Facture", "Liste des produits : ");
         for (Product p : productsList) {
@@ -104,5 +129,7 @@ public class TransactionDialog extends DialogFragment {
         Log.i("Facture", "   Taxes \t" + taxes + "$");
         Log.i("Facture", "Total : \t" + String.format("%.02f", (total + taxes)) + "$");
         Log.i("Facture", "  ");
+
+        return total + taxes;
     }
 }

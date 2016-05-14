@@ -4,25 +4,18 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/lblTransaction"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/transaction" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/transaction_end_total" />
 
-    TextView
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@string/total"
-        android:id="@+id/transaction_total_price" />
-
-    <ListView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/list_transaction"
-        tools:listitem="@android:layout/simple_list_item_1" />
-
+        android:text="Small Text"
+        android:id="@+id/transaction_end_listchange" />
 </LinearLayout>

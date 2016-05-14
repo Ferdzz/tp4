@@ -16,6 +16,10 @@ import com.deguet.joris.tp4.data.Product;
 import com.deguet.joris.tp4.data.ProductCRUD;
 import com.deguet.joris.tp4.data.Purchase;
 import com.deguet.joris.tp4.data.PurchaseCRUD;
+import com.deguet.joris.tp4.monnayeur.binette.BinetteChangeService;
+import com.deguet.joris.tp4.monnayeur.binette.BinetteTiroir;
+import com.deguet.joris.tp4.monnayeur.deguet.ChangeService;
+import com.deguet.joris.tp4.monnayeur.deguet.TiroirArgent;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -32,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
     public ProductCRUD productCRUD;
     public PurchaseCRUD purchaseCRUD;
 
+    public TiroirArgent tiroir;
+    public ChangeService changeService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
         this.adapter = new ProductsAdapter(MainActivity.this, products);
         ListView list = (ListView)findViewById(R.id.listProduct);
         list.setAdapter(adapter);
+
+        this.changeService = new BinetteChangeService();
+        this.tiroir = changeService.tiroirPlein();
 
         final MainActivity that = this;
         ((Button) findViewById(R.id.btnScanner)).setOnClickListener(new View.OnClickListener() {
@@ -182,13 +192,9 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-//        Purchase purchase = new Purchase(products);
-//        purchaseCRUD.save(purchase);
-
-        new TransactionDialog().setProductsList(products).show(getFragmentManager(), "Change");
-
-        // TODO: Peut-etre qu'il faudrait pas clear la liste ici et créer une facture avant?
         products.clear();
         adapter.notifyDataSetChanged();
+
+        new TransactionDialog().setProductsList(products).setTiroir(tiroir).setChangeService(changeService).show(getFragmentManager(), "Change");
     }
 }

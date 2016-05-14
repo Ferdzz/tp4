@@ -17,4 +17,6 @@
     <string name="cancel">Cancel</string>
     <string name="no_product_to_pay">No products to pay</string>
     <string name="transaction">Transaction</string>
+    <string name="not_enough_money">Problem while processing the input</string>
+    <string name="total_change">Total change: </string>
 </resources>
