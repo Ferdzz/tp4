@@ -9,4 +9,6 @@
         android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/show_caisse" android:title="@string/show_caisse"
         android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/set_tax_limit" android:title="@string/set_tax_limit"
+        android:orderInCategory="100" app:showAsAction="never" />
 </menu>
