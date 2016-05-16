@@ -28,7 +28,7 @@ public class TransactionDialog extends DialogFragment {
 
     /*
     TODO btnvoirEtatCaisse -- CECI N'EST PAS MENTIONNÉ DANS LE WORD?
-    -- voir l'état du tirroir caisse en tout temps
+    -- voir l'état du tirroir caisse en tout temps avec un btn dans le menu
 
     DONE OnCreate
     --afficher tous les possibilité d'argentphysique dans la liste

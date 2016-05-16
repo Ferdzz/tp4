@@ -83,4 +83,16 @@ public class BinetteChangeService implements ChangeService {
             return NouveauTiroir;
 
     }
+
+    public TiroirArgent tiroirMoitierPlein() {
+        TiroirArgent NouveauTiroir = new BinetteTiroir();
+        for (ArgentPhysique items: ArgentPhysique.values())
+        {
+            if(items.valeurEnCents != 1)
+                try {
+                    NouveauTiroir.ajouterItem(items,(NouveauTiroir.capaciteMaxPour(items)/2));
+                } catch (Exception e) {}
+        }
+        return NouveauTiroir;
+    }
 }

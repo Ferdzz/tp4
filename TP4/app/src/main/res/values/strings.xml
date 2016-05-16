@@ -19,4 +19,5 @@
     <string name="transaction">Transaction</string>
     <string name="not_enough_money">Problem while processing the input</string>
     <string name="total_change">Total change: </string>
+    <string name="show_caisse">Show money</string>
 </resources>
