@@ -18,6 +18,7 @@
     <string name="cancel">Annuler</string>
     <string name="no_product_to_pay">Pas de produits à payer</string>
     <string name="transaction">Transaction</string>
-    <string name="not_enough_money">Il y a eu un probleme avec l\'entree de donnees</string>
+    <string name="not_enough_money">Pas assez d\'argent donné</string>
     <string name="total_change">Change total: </string>
+    <string name="not_enough_money_in_bank">Pas assez d\'argent dans la caisse</string>
 </resources>

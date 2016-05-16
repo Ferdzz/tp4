@@ -37,7 +37,7 @@ public class ChangeDialog extends DialogFragment {
             }
         }
         ((TextView)v.findViewById(R.id.transaction_end_listchange)).setText(s);
-        ((TextView)v.findViewById(R.id.transaction_end_total)).setText(getResources().getString(R.string.total_change) + change.valeurTotale() + " $");
+        ((TextView)v.findViewById(R.id.transaction_end_total)).setText(getResources().getString(R.string.total_change) +  String.format("%.02f", change.valeurTotale()) + " $");
 
         builder.setView(v)
                 // Add action buttons

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.deguet.joris.tp4.data.Product;
@@ -51,6 +52,8 @@ public class TransactionDialog extends DialogFragment {
     private List<Product> productsList;
     private TiroirArgent tiroir;
     private ChangeService changeService;
+    private ProductsAdapter productAdapter;
+    private MainActivity activity;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -58,13 +61,15 @@ public class TransactionDialog extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         final View v = inflater.inflate(R.layout.dialog_transaction_start, null);
 
+        ((TextView)v.findViewById(R.id.lblTransaction)).setText(String.format("%.02f", (getTotal() + getTaxes(getTotal()))) + "$");
+
         listArgent = new ArrayList<>();
         for (ArgentPhysique argent : ArgentPhysique.values()) {
             listArgent.add(argent);
         }
 
         this.adapter = new ChangeAdapter(getActivity(), listArgent);
-        ListView list = (ListView)v.findViewById(R.id.list_transaction);
+        final ListView list = (ListView)v.findViewById(R.id.list_transaction);
         list.setAdapter(adapter);
 
         builder.setView(v)
@@ -75,15 +80,30 @@ public class TransactionDialog extends DialogFragment {
                         logFacture();
 
                         try {
-                            double total = 0;
+                            double totalDonne = 0;
+                            double prix = getTotal() + getTaxes(getTotal());
                             for (ArgentPhysique a : listArgent) {
-                                total += a.getAmounts() * a.valeur();
+                                totalDonne += a.getAmounts() * a.valeur();
                             }
-                            Change change = changeService.calculerChange(total, tiroir);
+
+                            if (totalDonne - prix < 0) {
+                                Toast.makeText(getActivity().getApplicationContext(), R.string.not_enough_money, Toast.LENGTH_LONG).show();
+                                return;
+                            }
+
+                            Change change = changeService.calculerChange(totalDonne - prix, tiroir);
+                            activity.products.clear();
+                            activity.adapter.notifyDataSetChanged();
+                            logFacture();
+
+                            // put the new change in the tiroir
+                            for (ArgentPhysique a : listArgent) {
+                                tiroir.ajouterItem(a, a.getAmounts());
+                            }
+
                             new ChangeDialog().setChange(change).show(getFragmentManager(), "Transaction end");
-//                            getDialog().dismiss();
                         } catch (ArgentException e) {
-                            Toast.makeText(getActivity().getApplicationContext(), R.string.not_enough_money, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity().getApplicationContext(), R.string.not_enough_money_in_bank, Toast.LENGTH_LONG).show();
                         }
                     }
                 })
@@ -93,6 +113,35 @@ public class TransactionDialog extends DialogFragment {
                     }
                 });
         return builder.create();
+    }
+
+    private void logFacture() {
+        Log.i("Facture", "  ");
+        Log.i("Facture", "Liste des produits : ");
+        for (Product p : productsList) {
+            String string = "  " + p.name;
+            if(p.is2for1)
+                string += " (2 pour 1)";
+            if(!p.isTaxable)
+                string += " (non taxable)";
+            string += "\t x" + p.amount;
+            Log.i("Facture", "\t" + string);
+        }
+
+        float total = getTotal();
+        float taxes = getTaxes(total);
+        Log.i("Facture", "Sous total : \t" + total + "$");
+        Log.i("Facture", "   Taxes \t" + taxes + "$");
+        Log.i("Facture", "Total : \t" + String.format("%.02f", (total + taxes)) + "$");
+        Log.i("Facture", "  ");
+    }
+
+    private float getTotal() {
+        return Utils.calculateTotalPrice(productsList);
+    }
+
+    private float getTaxes(float total) {
+        return Utils.calculateTaxes(productsList, total);
     }
 
     public TransactionDialog setProductsList(List<Product> productsList) {
@@ -109,27 +158,14 @@ public class TransactionDialog extends DialogFragment {
         this.tiroir = tiroir;
         return this;
     }
-    
-    private float logFacture() {
-        Log.i("Facture", "  ");
-        Log.i("Facture", "Liste des produits : ");
-        for (Product p : productsList) {
-            String string = "  " + p.name;
-            if(p.is2for1)
-                string += " (2 pour 1)";
-            if(!p.isTaxable)
-                string += " (non taxable)";
-            string += "\t x" + p.amount;
-            Log.i("Facture", "\t" + string);
-        }
 
-        float total = Utils.calculateTotalPrice(productsList);
-        float taxes = Utils.calculateTaxes(productsList, total);
-        Log.i("Facture", "Sous total : \t" + total + "$");
-        Log.i("Facture", "   Taxes \t" + taxes + "$");
-        Log.i("Facture", "Total : \t" + String.format("%.02f", (total + taxes)) + "$");
-        Log.i("Facture", "  ");
+    public TransactionDialog setProductAdapter(ProductsAdapter adapter) {
+        this.productAdapter = adapter;
+        return this;
+    }
 
-        return total + taxes;
+    public TransactionDialog setActivity(MainActivity activity) {
+        this.activity = activity;
+        return this;
     }
 }

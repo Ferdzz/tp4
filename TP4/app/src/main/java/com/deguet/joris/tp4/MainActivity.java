@@ -191,10 +191,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), R.string.no_product_to_pay, Toast.LENGTH_SHORT).show();
             return;
         }
-
-        products.clear();
-        adapter.notifyDataSetChanged();
-
-        new TransactionDialog().setProductsList(products).setTiroir(tiroir).setChangeService(changeService).show(getFragmentManager(), "Change");
+        new TransactionDialog().setProductsList(products).setProductAdapter(adapter).setTiroir(tiroir).setActivity(this).setChangeService(changeService).show(getFragmentManager(), "Change");
     }
 }
