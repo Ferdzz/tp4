@@ -142,9 +142,6 @@ public class MainActivity extends AppCompatActivity {
             for (ArgentPhysique argent: ArgentPhysique.values()) {
                 Log.i("Caisse", Integer.toString(tiroir.nombreItemsPour(argent)) +" "+ argent.nomLisible());
             }
-
-
-
         }
 
         return super.onOptionsItemSelected(item);

@@ -43,4 +43,16 @@
         android:id="@+id/dialog_code"
         android:layout_gravity="center_horizontal" />
 
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Taxable"
+        android:id="@+id/dialog_taxable" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/is_2_for_1"
+        android:id="@+id/dialog_2for1" />
+
 </LinearLayout>

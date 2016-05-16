@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,7 +45,7 @@ public class NewProductDialog extends DialogFragment {
                         }
 //                        if (nullText(name) && nullText(price) && nullText(code)) {
 
-                        act.productCRUD.save(new Product(name, Float.parseFloat(price), code));
+                        act.productCRUD.save(new Product(name, Float.parseFloat(price), code, ((CheckBox)v.findViewById(R.id.dialog_2for1)).isChecked(), ((CheckBox)v.findViewById(R.id.dialog_taxable)).isChecked()));
 //                        }
                     }
                 })

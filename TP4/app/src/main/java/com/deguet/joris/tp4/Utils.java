@@ -8,6 +8,9 @@ import java.util.List;
  * Created by 1452284 on 2016-05-03.
  */
 public class Utils {
+
+    public static float produitGratuit;
+
     public static float calculateTotalPrice(List<Product> products) {
         float total = 0;
 

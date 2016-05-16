@@ -77,8 +77,6 @@ public class TransactionDialog extends DialogFragment {
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        logFacture();
-
                         try {
                             double totalDonne = 0;
                             double prix = getTotal() + getTaxes(getTotal());
@@ -97,13 +95,18 @@ public class TransactionDialog extends DialogFragment {
                             logFacture();
 
                             // put the new change in the tiroir
-                            for (ArgentPhysique a : listArgent) {
-                                tiroir.ajouterItem(a, a.getAmounts());
+                            try {
+                                for (ArgentPhysique a : listArgent) {
+                                    tiroir.ajouterItem(a, a.getAmounts());
+                                }
+                            } catch (ArgentException e) {
+                                Toast.makeText(getActivity().getApplicationContext(), R.string.too_much_money_in_bank, Toast.LENGTH_LONG).show();
                             }
 
                             new ChangeDialog().setChange(change).show(getFragmentManager(), "Transaction end");
                         } catch (ArgentException e) {
                             Toast.makeText(getActivity().getApplicationContext(), R.string.not_enough_money_in_bank, Toast.LENGTH_LONG).show();
+                            return;
                         }
                     }
                 })
