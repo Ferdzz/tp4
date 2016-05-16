@@ -20,4 +20,5 @@
     <string name="not_enough_money">Not enough money given</string>
     <string name="total_change">Total change: </string>
     <string name="not_enough_money_in_bank">Not enough money in bank</string>
+    <string name="show_caisse">Show money</string>
 </resources>

@@ -18,6 +18,7 @@ import com.deguet.joris.tp4.data.Purchase;
 import com.deguet.joris.tp4.data.PurchaseCRUD;
 import com.deguet.joris.tp4.monnayeur.binette.BinetteChangeService;
 import com.deguet.joris.tp4.monnayeur.binette.BinetteTiroir;
+import com.deguet.joris.tp4.monnayeur.deguet.ArgentPhysique;
 import com.deguet.joris.tp4.monnayeur.deguet.ChangeService;
 import com.deguet.joris.tp4.monnayeur.deguet.TiroirArgent;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     public PurchaseCRUD purchaseCRUD;
 
     public TiroirArgent tiroir;
-    public ChangeService changeService;
+    public BinetteChangeService changeService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         list.setAdapter(adapter);
 
         this.changeService = new BinetteChangeService();
-        this.tiroir = changeService.tiroirPlein();
+        this.tiroir = changeService.tiroirMoitierPlein();
 
         final MainActivity that = this;
         ((Button) findViewById(R.id.btnScanner)).setOnClickListener(new View.OnClickListener() {
@@ -77,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
                 pay();
             }
         });
+
+
 
         updatePrice(0);
     }
@@ -134,6 +137,14 @@ public class MainActivity extends AppCompatActivity {
             }
             adapter.notifyDataSetChanged();
             return true;
+        }
+        else if (id == R.id.show_caisse) {
+            for (ArgentPhysique argent: ArgentPhysique.values()) {
+                Log.i("Caisse", Integer.toString(tiroir.nombreItemsPour(argent)) +" "+ argent.nomLisible());
+            }
+
+
+
         }
 
         return super.onOptionsItemSelected(item);
