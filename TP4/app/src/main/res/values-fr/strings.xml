@@ -22,7 +22,6 @@
     <string name="total_change">Change total: </string>
     <string name="not_enough_money_in_bank">Pas assez d\'argent dans la caisse</string>
     <string name="show_caisse">Montrer Caisse</string>
-    <string name="show_caisse">Afficher la caisse</string>
     <string name="too_much_money_in_bank">Trop d\'argent dans la caisse</string>
     <string name="is_2_for_1">Est 2 pour 1</string>
 </resources>

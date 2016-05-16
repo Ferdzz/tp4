@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Utils {
 
-    public static float produitGratuit;
+    public static Product freeProduct;
 
     public static float calculateTotalPrice(List<Product> products) {
         float total = 0;

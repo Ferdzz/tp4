@@ -106,7 +106,6 @@ public class TransactionDialog extends DialogFragment {
                             new ChangeDialog().setChange(change).show(getFragmentManager(), "Transaction end");
                         } catch (ArgentException e) {
                             Toast.makeText(getActivity().getApplicationContext(), R.string.not_enough_money_in_bank, Toast.LENGTH_LONG).show();
-                            return;
                         }
                     }
                 })
